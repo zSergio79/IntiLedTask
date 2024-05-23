@@ -1,0 +1,47 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:IntiLedTask.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="using:Avalonia.Xaml.Interactivity"
+        xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+        xmlns:views ="using:IntiLedTask.Views"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="IntiLedTask.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="IntiLedTask">
+
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
+  <Window.Styles>
+  </Window.Styles>
+  <Grid RowDefinitions="Auto,*, Auto" Margin="5">
+
+    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+      <Button Content="Add" Command="{Binding AddPeopleCommand}"/>
+      <Button Content="Delete" Command="{Binding DeletePeopleCommand}"/>
+    </StackPanel>
+
+    <DataGrid Grid.Row="1" BorderThickness="1" BorderBrush="Gray"
+              ItemsSource="{Binding PeopleForEditCollection}" SelectedItem="{Binding PeopleForEdit}">
+      <DataGrid.Columns>
+        <DataGridTextColumn IsReadOnly="True" Header="Имя" Width="*" Binding="{Binding Name}"/>
+        <DataGridTextColumn IsReadOnly="True" Header="Фамилия" Width="*" Binding="{Binding Surname}"/>
+        <DataGridTextColumn IsReadOnly="True" Header="Возраст" Width="*" Binding="{Binding Age}"/>
+        <DataGridTextColumn IsReadOnly="True" Header="Город проживания" Width="*" Binding="{Binding City}"/>
+      </DataGrid.Columns>
+      <i:Interaction.Behaviors>
+        <ia:EventTriggerBehavior EventName="DoubleTapped">
+          <ia:InvokeCommandAction Command="{Binding EditPeopleCommand}"/>
+        </ia:EventTriggerBehavior>
+      </i:Interaction.Behaviors>
+    </DataGrid>
+    <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" Padding="5" Margin="0 2">
+      <TextBlock Text="{Binding Status, StringFormat='Статус: {0}'}"/>
+    </Border>
+  </Grid>
+</Window>

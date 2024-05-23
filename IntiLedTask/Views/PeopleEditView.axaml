@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:IntiLedTask.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="IntiLedTask.Views.PeopleEditView"
+             x:DataType="vm:PeopleEditViewModel">
+  <UserControl.Styles>
+    <Style Selector="Grid > TextBlock">
+      <Setter Property="HorizontalAlignment" Value="Right"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+      <Setter Property="Margin" Value="5, 1"/>
+    </Style>
+    <Style Selector="Grid > TextBox">
+      <Setter Property="Margin" Value="5, 1"/>
+    </Style>
+  </UserControl.Styles>
+  
+      <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto, *"  Grid.Row="0" VerticalAlignment="Stretch">
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Name"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Surname"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Age"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="City"/>
+
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}" Watermark="Name"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Surname}" Watermark="Surname"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Age}" Watermark="Age"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding City}" Watermark="City"/>
+      </Grid>
+    
+</UserControl>
